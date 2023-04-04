@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  ngrok:
+    image: wernight/ngrok
+    depends_on:
+      - chatgptslackbot
+    env_file:
+      - .env
+    ports:
+      - 4040:4040
+  chatgptslackbot:
+    build:
+      context: .
+    image: chatgptslackbot
+    restart: always
+    container_name: chatgptslackbot
+    env_file:
+      - ./variables.env
+    ports:
+      - "5000:5000"
